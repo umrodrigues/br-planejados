@@ -1,37 +1,40 @@
 .aboutSection {
-  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-  color: #f5deb3;
-  padding: 5rem 2rem;
-  text-align: center;
-
-  .iconWrapper {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffd700;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-    margin: 0 auto 1.5rem;
-
-    svg {
-      color: #0a0a0a;
-    }
-  }
+  display: flex;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4a432b;
 
   h2 {
-    font-size: 2.2rem;
-    color: #ffd700;
-    margin-bottom: 1rem;
-    letter-spacing: 1px;
+    flex: 1;
+    font-weight: 900;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0;
   }
 
   p {
-    max-width: 600px;
-    margin: 0 auto;
+    flex: 2;
     font-size: 1.1rem;
-    color: #d8cfa5;
-    line-height: 1.7;
+    line-height: 1.6;
+    color: #6e6443;
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    padding: 2rem 1rem;
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
   }
 }

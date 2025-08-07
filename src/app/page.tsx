@@ -9,13 +9,14 @@ import Servicos from './packages/components/servicos/servicos';
 export default function Home() {
   return (
     <>
-    {/* <Header />
-    <AboutSection/> */}
-    {/* <Footer /> */}
+    <Header />
+    <AboutSection/> 
+
     <Banner />
     <Servicos />
     <GoToWhatsapp />
     <BackToTopButton />
+    <Footer />
     </>
 
   );

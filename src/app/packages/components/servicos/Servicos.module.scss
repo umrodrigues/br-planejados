@@ -12,14 +12,19 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
   }
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -29,8 +34,8 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
   margin: 0 auto;
 
   &:hover {
@@ -48,8 +53,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
+  user-select: none;
 }
 
 .image {
@@ -76,11 +82,20 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 15px;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 20px;
   border-radius: 50%;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   border: none;
   cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.carousel .keen-slider__slide {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }

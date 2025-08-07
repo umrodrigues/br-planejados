@@ -1,12 +1,13 @@
 .footer {
-  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-  color: #f5deb3;
-  padding: 4rem 2rem;
+  background: #f9f8f3;
+  color: #6e684a;
+  padding: 2rem 1.5rem;
   text-align: center;
+  box-shadow: 0 -3px 10px rgb(110 104 74 / 0.15);
 }
 
 .inner {
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -14,68 +15,68 @@
 }
 
 .logo {
-  font-size: 2rem;
-  color: #ffd700;
+  font-size: 1.8rem;
+  color: #9f925c;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   letter-spacing: 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .tagline {
-  font-size: 1rem;
-  color: #d4cfa5;
-  margin-bottom: 2rem;
-  max-width: 500px;
+  font-size: 0.95rem;
+  color: #8a8564;
+  margin-bottom: 1.2rem;
+  max-width: 400px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .socials {
   display: flex;
-  gap: 1.2rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 
   a {
-    background-color: #262626;
-    padding: 0.7rem;
+    background-color: #ecebe1;
+    padding: 0.5rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 1px 5px rgb(159 146 92 / 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 
     svg {
-      color: #ffd700;
-      transition: color 0.3s;
+      color: #7a6e3c;
+      transition: color 0.3s ease;
     }
 
     &:hover {
-      background-color: #ffd700;
+      background-color: #9f925c;
+      box-shadow: 0 3px 12px rgb(159 146 92 / 0.5);
 
       svg {
-        color: #0a0a0a;
+        color: #f9f8f3;
       }
-
-      transform: translateY(-4px);
     }
   }
 }
 
-.copy {
-  font-size: 0.85rem;
-  color: #a89f7f;
-}
-
 .dev {
   font-size: 0.85rem;
-  color: #a89f7f;
+  color: #7a6e3c;
+  font-weight: 600;
 
   a {
-    color: #ffd700;
+    color: #9f925c;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
+    transition: color 0.25s ease;
 
     &:hover {
+      color: #bfb887;
       text-decoration: underline;
-      color: #fff3b0;
     }
   }
 }

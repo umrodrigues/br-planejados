@@ -14,7 +14,14 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <Image src="/BR.png" alt="BR Planejados" width={180} height={100} />
+          <Image
+            src="/BR.png"
+            alt="BR Planejados"
+            width={160}
+            height={90}
+            priority
+            className={styles.logoImage}
+          />
         </Link>
 
         <nav className={styles.desktopNav}>
@@ -28,24 +35,25 @@ export default function Header() {
         <button
           className={styles.menuToggle}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menu"
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
         >
-          {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {menuOpen ? <FiX size={26} /> : <FiMenu size={26} />}
         </button>
       </div>
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <motion.nav
             className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25 }}
           >
             <Link href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</Link>
             <Link href="#quem-somos" onClick={() => setMenuOpen(false)}>Quem somos</Link>
             <Link href="#contato" onClick={() => setMenuOpen(false)}>Contato</Link>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

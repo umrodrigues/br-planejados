@@ -7,7 +7,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { FaPlay } from 'react-icons/fa'
 import { servicos } from './__mocks__/servicos.mock'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 type MidiaItem = {
   type: 'image' | 'video'
@@ -54,16 +54,24 @@ function ServicoCarousel({ midia }: ServicoCarouselProps) {
     mode: 'snap',
   })
 
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({})
   const [playing, setPlaying] = useState<Record<number, boolean>>({})
 
-  const togglePlay = (idx: number, videoRef: HTMLVideoElement | null) => {
-    if (!videoRef) return
+  const togglePlay = (idx: number) => {
+    const video = videoRefs.current[idx]
+    if (!video) return
+
     if (playing[idx]) {
-      videoRef.pause()
+      video.pause()
+      setPlaying((prev) => ({ ...prev, [idx]: false }))
     } else {
-      videoRef.play()
+      video.play()
+      setPlaying((prev) => ({ ...prev, [idx]: true }))
     }
-    setPlaying((prev) => ({ ...prev, [idx]: !prev[idx] }))
+  }
+
+  const handleClick = (idx: number) => {
+    togglePlay(idx)
   }
 
   return (
@@ -71,36 +79,51 @@ function ServicoCarousel({ midia }: ServicoCarouselProps) {
       {midia.map((item, idx) => {
         if (item.type === 'image') {
           return (
-            <div key={idx} className={`keen-slider__slide ${styles.slide}`}>
+            <div
+              key={idx}
+              className={`keen-slider__slide ${styles.slide}`}
+              style={{ cursor: 'default' }}
+            >
               <Image
                 src={item.src}
                 alt={item.alt || ''}
-                width={500}
-                height={500}
+                width={600}
+                height={400}
                 className={styles.image}
+                priority
               />
             </div>
           )
         }
         if (item.type === 'video') {
-          let videoRef: HTMLVideoElement | null = null
           return (
-            <div key={idx} className={`keen-slider__slide ${styles.slide}`}>
+            <div
+              key={idx}
+              className={`keen-slider__slide ${styles.slide}`}
+              onClick={() => handleClick(idx)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className={styles.videoWrapper}>
                 <video
-                  ref={(ref) => {
-                    videoRef = ref
+                  ref={(el): void => {
+                    videoRefs.current[idx] = el
                   }}
                   src={item.src}
                   className={styles.video}
                   preload="metadata"
                 />
-                <button
-                  className={styles.playIcon}
-                  onClick={() => togglePlay(idx, videoRef)}
-                >
-                  <FaPlay />
-                </button>
+                {!playing[idx] && (
+                  <button
+                    className={styles.playIcon}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      togglePlay(idx)
+                    }}
+                    aria-label="Play video"
+                  >
+                    <FaPlay />
+                  </button>
+                )}
               </div>
             </div>
           )
