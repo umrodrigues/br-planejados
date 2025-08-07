@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "sass:meta"; 
+@use "./variables" as *; 
+
+@mixin media($breakpoint) {
+  $media: map.get($breakpoints, $breakpoint);
+
+  @media #{meta.inspect($media)} { 
+    @content;
+  }
+}

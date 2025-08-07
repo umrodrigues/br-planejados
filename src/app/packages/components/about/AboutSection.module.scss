@@ -1,0 +1,37 @@
+.aboutSection {
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+  color: #f5deb3;
+  padding: 5rem 2rem;
+  text-align: center;
+
+  .iconWrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffd700;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    margin: 0 auto 1.5rem;
+
+    svg {
+      color: #0a0a0a;
+    }
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+
+  p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #d8cfa5;
+    line-height: 1.7;
+  }
+}

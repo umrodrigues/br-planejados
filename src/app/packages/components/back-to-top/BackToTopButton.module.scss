@@ -1,0 +1,56 @@
+
+.button {
+  cursor: pointer;
+  position: fixed;
+  left: 8px; 
+  bottom: 1.5rem; 
+  z-index: 101; 
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  background: #f7f7f7;
+  box-shadow: 0rem 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-in-out forwards;
+  pointer-events: none;
+}
