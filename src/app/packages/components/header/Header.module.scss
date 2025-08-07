@@ -1,5 +1,5 @@
 .header {
-  background-color: #f9f7f1;
+  background-color: #e6dfc6;
   color: #b68d40;
   position: sticky;
   top: 0;
@@ -24,7 +24,7 @@
   transition: filter 0.3s ease;
 
   &:hover {
-    filter: drop-shadow(0 0 8px rgba(182, 141, 64, 1));
+    filter: drop-shadow(0 0 10px rgba(182, 141, 64, 1));
   }
 }
 

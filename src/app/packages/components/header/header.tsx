@@ -14,14 +14,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <Image
-            src="/BR.png"
-            alt="BR Planejados"
-            width={160}
-            height={90}
-            priority
-            className={styles.logoImage}
-          />
+          <Image src="/BR.png" alt="BR Planejados" width={160} height={90} priority className={styles.logoImage} />
         </Link>
 
         <nav className={styles.desktopNav}>
