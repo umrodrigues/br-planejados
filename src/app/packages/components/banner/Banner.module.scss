@@ -1,0 +1,77 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  object-fit: cover;
+  z-index: 1;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px 40px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  max-width: 90%;
+
+  h1 {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+  .button {
+    display: inline-block;
+    margin-top: 18px;
+    background: linear-gradient(135deg, #6a5644, #8c745c);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: linear-gradient(135deg, #5a4a3a, #7a6350);
+    }
+    }
+
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 15px 25px;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
