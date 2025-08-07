@@ -5,6 +5,7 @@ import Footer from './packages/components/footer/footer';
 import { GoToWhatsapp } from './packages/components/go-to-whatsapp/go-to-whatsapp';
 import { BackToTopButton } from './packages/components/back-to-top/back-to-top-button';
 import Banner from './packages/components/banner/banner';
+import Servicos from './packages/components/servicos/servicos';
 export default function Home() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function Home() {
     <AboutSection/> */}
     {/* <Footer /> */}
     <Banner />
+    <Servicos />
     <GoToWhatsapp />
     <BackToTopButton />
     </>
