@@ -37,12 +37,12 @@ export default function Footer() {
         </motion.p>
         <div className={styles.socials}>
           <motion.div whileHover="hover" initial="initial" variants={iconVariants}>
-            <Link href="https://www.instagram.com/lunaris.tech/" target="_blank" aria-label="Instagram">
+            <Link href="https://www.instagram.com/br.planejados" target="_blank" aria-label="Instagram">
               <FaInstagram size={22} />
             </Link>
           </motion.div>
           <motion.div whileHover="hover" initial="initial" variants={iconVariants}>
-            <Link href="https://api.whatsapp.com/send?phone=5551997791996" target="_blank" aria-label="WhatsApp">
+            <Link href="https://api.whatsapp.com/send?phone=555198503622" target="_blank" aria-label="WhatsApp">
               <FaWhatsapp size={22} />
             </Link>
           </motion.div>

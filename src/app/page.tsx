@@ -10,10 +10,9 @@ export default function Home() {
   return (
     <>
     <Header />
-    <AboutSection/> 
-
     <Banner />
     <Servicos />
+    <AboutSection/> 
     <GoToWhatsapp />
     <BackToTopButton />
     <Footer />
