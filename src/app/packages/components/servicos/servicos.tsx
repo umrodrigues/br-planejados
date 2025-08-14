@@ -56,7 +56,7 @@ export default function Servicos() {
   }, [])
 
   return (
-    <section className={styles.servicos}>
+    <section className={styles.servicos} id="servicos">
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
