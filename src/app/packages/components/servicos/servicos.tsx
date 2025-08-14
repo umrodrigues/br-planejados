@@ -11,6 +11,7 @@ type MidiaItem = { type: 'image'; src: string; alt?: string }
 
 export default function Servicos() {
   const [servicos, setServicos] = useState<{ midia: MidiaItem[] }[]>([])
+  const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalImages, setModalImages] = useState<MidiaItem[]>([])
   const [modalIndex, setModalIndex] = useState(0)
@@ -49,7 +50,10 @@ export default function Servicos() {
           .filter(Boolean) as MidiaItem[]
         if (midia.length) lista.push({ midia })
       }
-      if (mounted) setServicos(lista)
+      if (mounted) {
+        setServicos(lista)
+        setLoading(false)
+      }
     }
     build()
     return () => { mounted = false }
@@ -71,18 +75,22 @@ export default function Servicos() {
         NOSSOS SERVIÇOS
       </motion.h2>
       <div className={styles.grid}>
-        {servicos.map((servico, index) => (
-          <motion.div
-            key={index}
-            className={styles.card}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <ServicoCarousel midia={servico.midia} onClick={(i) => openModal(servico.midia, i)} />
-          </motion.div>
-        ))}
+        {loading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className={styles.shimmer}></div>
+            ))
+          : servicos.map((servico, index) => (
+              <motion.div
+                key={index}
+                className={styles.card}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <ServicoCarousel midia={servico.midia} onClick={(i) => openModal(servico.midia, i)} />
+              </motion.div>
+            ))}
       </div>
 
       {modalOpen && (
