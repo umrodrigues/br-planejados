@@ -1,7 +1,7 @@
 export const servicos = [
   {
     midia: [
-      { type: 'image', src: '/servicos.jpg', alt: 'Cozinha planejada' },
+      { type: 'image', src: '/projetos/projeto1.1.jpg', alt: 'Cozinha planejada' },
       { type: 'image', src: '/servicos.jpg', alt: 'Cozinha planejada detalhe' },
       { type: 'video', src: '/video.mp4', alt: 'Vídeo cozinha' },
     ],

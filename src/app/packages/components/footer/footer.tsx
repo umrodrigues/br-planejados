@@ -33,7 +33,7 @@ export default function Footer() {
           animate={{ opacity: 1 }} 
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          Transformando ideias em soluções digitais.
+          Transformando ideias em soluções para o seu lar.
         </motion.p>
         <div className={styles.socials}>
           <motion.div whileHover="hover" initial="initial" variants={iconVariants}>
