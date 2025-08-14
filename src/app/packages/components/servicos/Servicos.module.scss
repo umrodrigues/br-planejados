@@ -1,45 +1,34 @@
 .servicos {
-  padding: 50px 20px;
+  padding: 60px 20px;
   text-align: center;
-
   h2 {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
 }
 
 .card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: transform 0.3s ease;
-  width: 600px;
-  height: 400px;
-  margin: 0 auto;
-
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
   }
 }
 
@@ -49,53 +38,15 @@
 }
 
 .slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  width: 600px;
-  height: 400px;
-  user-select: none;
+  width: 100%;
+  height: 100%;
 }
 
 .image {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
-.videoWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-.playIcon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.55);
-  padding: 20px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.8rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.7);
-  }
-}
-
-.carousel .keen-slider__slide {
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+.keen-slider__slide {
+  transition: transform 0.8s ease;
 }
