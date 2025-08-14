@@ -5,12 +5,10 @@ import styles from './Servicos.module.scss'
 import { motion } from 'framer-motion'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
-import { FaPlay } from 'react-icons/fa'
-import { servicos } from './__mocks__/servicos.mock'
-import { useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 type MidiaItem = {
-  type: 'image' | 'video'
+  type: 'image'
   src: string
   alt?: string
 }
@@ -20,6 +18,60 @@ interface ServicoCarouselProps {
 }
 
 export default function Servicos() {
+  const [servicos, setServicos] = useState<{ midia: MidiaItem[] }[]>([])
+
+  useEffect(() => {
+    let mounted = true
+    const exists = async (url: string) => {
+      try {
+        const head = await fetch(url, { method: 'HEAD', cache: 'no-store' })
+        if (head.ok) return true
+        if (head.status === 405) {
+          const getResp = await fetch(url, { method: 'GET', cache: 'no-store' })
+          return getResp.ok
+        }
+        return false
+      } catch {
+        return false
+      }
+    }
+
+    const build = async () => {
+      const totalProjetos = 20
+      const imagensPorProjeto = 3
+      const lista: { midia: MidiaItem[] }[] = []
+
+      for (let p = 1; p <= totalProjetos; p++) {
+        const checks = await Promise.all(
+          Array.from({ length: imagensPorProjeto }, (_, i) =>
+            exists(`/projetos/projeto${p}.${i + 1}.jpg`)
+          )
+        )
+
+        const midia: MidiaItem[] = checks
+          .map((ok, i) =>
+            ok
+              ? {
+                  type: 'image' as const,
+                  src: `/projetos/projeto${p}.${i + 1}.jpg`,
+                  alt: `Projeto ${p} imagem ${i + 1}`,
+                }
+              : null
+          )
+          .filter(Boolean) as MidiaItem[]
+
+        if (midia.length) lista.push({ midia })
+      }
+
+      if (mounted) setServicos(lista)
+    }
+
+    build()
+    return () => {
+      mounted = false
+    }
+  }, [])
+
   return (
     <section className={styles.servicos}>
       <motion.h2
@@ -29,7 +81,6 @@ export default function Servicos() {
       >
         NOSSOS SERVIÇOS
       </motion.h2>
-
       <div className={styles.grid}>
         {servicos.map((servico, index) => (
           <motion.div
@@ -49,87 +100,21 @@ export default function Servicos() {
 }
 
 function ServicoCarousel({ midia }: ServicoCarouselProps) {
-  const [sliderRef] = useKeenSlider({
-    loop: true,
-    mode: 'snap',
-  })
-
-  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({})
-  const [playing, setPlaying] = useState<Record<number, boolean>>({})
-
-  const togglePlay = (idx: number) => {
-    const video = videoRefs.current[idx]
-    if (!video) return
-
-    if (playing[idx]) {
-      video.pause()
-      setPlaying((prev) => ({ ...prev, [idx]: false }))
-    } else {
-      video.play()
-      setPlaying((prev) => ({ ...prev, [idx]: true }))
-    }
-  }
-
-  const handleClick = (idx: number) => {
-    togglePlay(idx)
-  }
-
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({ loop: true, mode: 'snap' })
   return (
     <div ref={sliderRef} className={`keen-slider ${styles.carousel}`}>
-      {midia.map((item, idx) => {
-        if (item.type === 'image') {
-          return (
-            <div
-              key={idx}
-              className={`keen-slider__slide ${styles.slide}`}
-              style={{ cursor: 'default' }}
-            >
-              <Image
-                src={item.src}
-                alt={item.alt || ''}
-                width={600}
-                height={400}
-                className={styles.image}
-                priority
-              />
-            </div>
-          )
-        }
-        if (item.type === 'video') {
-          return (
-            <div
-              key={idx}
-              className={`keen-slider__slide ${styles.slide}`}
-              onClick={() => handleClick(idx)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className={styles.videoWrapper}>
-                <video
-                  ref={(el): void => {
-                    videoRefs.current[idx] = el
-                  }}
-                  src={item.src}
-                  className={styles.video}
-                  preload="metadata"
-                />
-                {!playing[idx] && (
-                  <button
-                    className={styles.playIcon}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      togglePlay(idx)
-                    }}
-                    aria-label="Play video"
-                  >
-                    <FaPlay />
-                  </button>
-                )}
-              </div>
-            </div>
-          )
-        }
-        return null
-      })}
+      {midia.map((item, idx) => (
+        <div key={idx} className={`keen-slider__slide ${styles.slide}`} style={{ cursor: 'default' }}>
+          <Image
+            src={item.src}
+            alt={item.alt || ''}
+            width={600}
+            height={400}
+            className={styles.image}
+            priority={idx === 0}
+          />
+        </div>
+      ))}
     </div>
   )
 }
