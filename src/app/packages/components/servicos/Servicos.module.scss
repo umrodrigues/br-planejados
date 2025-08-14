@@ -10,7 +10,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   justify-content: center;
   max-width: 1400px;
@@ -27,9 +27,7 @@
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-8px);
-  }
+  &:hover { transform: translateY(-8px); }
 }
 
 .carousel {
@@ -41,12 +39,74 @@
   position: relative;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 
-.image {
-  object-fit: cover;
+.image { object-fit: cover; }
+
+.keen-slider__slide { transition: transform 0.8s ease; }
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.keen-slider__slide {
-  transition: transform 0.8s ease;
+.modalOverlay {
+  position: absolute;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+}
+
+.modalContent {
+  position: relative;
+  width: 70%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 85%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111;
+}
+
+.modalImage { object-fit: contain; }
+
+.close, .prev, .next {
+  position: absolute;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: background 0.3s;
+}
+.close { top: -20px; right: -20px; }
+.prev { left: -25px; top: 50%; transform: translateY(-50%); }
+.next { right: -25px; top: 50%; transform: translateY(-50%); }
+.close:hover, .prev:hover, .next:hover { background: rgba(0,0,0,0.9); }
+
+@media (max-width: 768px) {
+  .modalContent { width: 90%; flex-direction: column; gap: 20px; }
+  .imageWrapper { padding-top: 120%; }
+  .prev, .next { width: 50px; height: 50px; font-size: 1.8rem; }
+  .close { width: 45px; height: 45px; font-size: 1.8rem; top: -15px; right: -15px; }
 }

@@ -8,10 +8,12 @@ import 'keen-slider/keen-slider.min.css'
 import { useEffect, useState } from 'react'
 
 type MidiaItem = { type: 'image'; src: string; alt?: string }
-interface ServicoCarouselProps { midia: readonly MidiaItem[] }
 
 export default function Servicos() {
   const [servicos, setServicos] = useState<{ midia: MidiaItem[] }[]>([])
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalImages, setModalImages] = useState<MidiaItem[]>([])
+  const [modalIndex, setModalIndex] = useState(0)
 
   useEffect(() => {
     let mounted = true
@@ -55,6 +57,16 @@ export default function Servicos() {
     return () => { mounted = false }
   }, [])
 
+  const openModal = (images: MidiaItem[], index: number) => {
+    setModalImages(images)
+    setModalIndex(index)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => setModalOpen(false)
+  const prevSlide = () => setModalIndex((i) => (i - 1 + modalImages.length) % modalImages.length)
+  const nextSlide = () => setModalIndex((i) => (i + 1) % modalImages.length)
+
   return (
     <section className={styles.servicos} id="servicos">
       <motion.h2
@@ -74,15 +86,37 @@ export default function Servicos() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <ServicoCarousel midia={servico.midia} />
+            <ServicoCarousel midia={servico.midia} onClick={(i) => openModal(servico.midia, i)} />
           </motion.div>
         ))}
       </div>
+
+      {modalOpen && (
+        <div className={styles.modal}>
+          <div className={styles.modalOverlay} onClick={closeModal}></div>
+          <div className={styles.modalContent}>
+            <button className={styles.prev} onClick={prevSlide}>‹</button>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={modalImages[modalIndex].src}
+                alt={modalImages[modalIndex].alt || ''}
+                fill
+                sizes="100vw"
+                className={styles.modalImage}
+              />
+            </div>
+            <button className={styles.next} onClick={nextSlide}>›</button>
+            <button className={styles.close} onClick={closeModal}>×</button>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
 
-function ServicoCarousel({ midia }: ServicoCarouselProps) {
+interface CarouselProps { midia: MidiaItem[]; onClick?: (index: number) => void }
+
+function ServicoCarousel({ midia, onClick }: CarouselProps) {
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: { perView: 1 },
@@ -92,7 +126,11 @@ function ServicoCarousel({ midia }: ServicoCarouselProps) {
   return (
     <div ref={sliderRef} className={`keen-slider ${styles.carousel}`}>
       {midia.map((item, idx) => (
-        <div key={idx} className={`keen-slider__slide ${styles.slide}`}>
+        <div
+          key={idx}
+          className={`keen-slider__slide ${styles.slide}`}
+          onClick={() => onClick?.(idx)}
+        >
           <Image
             src={item.src}
             alt={item.alt || ''}

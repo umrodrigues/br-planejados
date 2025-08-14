@@ -38,7 +38,7 @@ export default function Banner() {
         </motion.h2>
 
         <motion.a
-          href="https://api.whatsapp.com/send?phone=5505185744145"
+          href="https://api.whatsapp.com/send?phone=555198503622"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
