@@ -15,6 +15,8 @@ export default function Servicos() {
   const [modalImages, setModalImages] = useState<MidiaItem[]>([])
   const [modalIndex, setModalIndex] = useState(0)
 
+  const ordemProjetos = [15, 17, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1, 16, 2, 18, 19, 20]
+
   useEffect(() => {
     let mounted = true
     const exists = async (url: string) => {
@@ -29,10 +31,10 @@ export default function Servicos() {
       } catch { return false }
     }
     const build = async () => {
-      const totalProjetos = 20
       const imagensPorProjeto = 3
       const lista: { midia: MidiaItem[] }[] = []
-      for (let p = 1; p <= totalProjetos; p++) {
+
+      for (const p of ordemProjetos) {
         const checks = await Promise.all(
           Array.from({ length: imagensPorProjeto }, (_, i) =>
             exists(`/projetos/projeto${p}.${i + 1}.jpg`)
@@ -41,11 +43,7 @@ export default function Servicos() {
         const midia: MidiaItem[] = checks
           .map((ok, i) =>
             ok
-              ? {
-                  type: 'image',
-                  src: `/projetos/projeto${p}.${i + 1}.jpg`,
-                  alt: `Projeto ${p} imagem ${i + 1}`,
-                }
+              ? { type: 'image', src: `/projetos/projeto${p}.${i + 1}.jpg`, alt: `Projeto ${p} imagem ${i + 1}` }
               : null
           )
           .filter(Boolean) as MidiaItem[]
@@ -69,11 +67,7 @@ export default function Servicos() {
 
   return (
     <section className={styles.servicos} id="servicos">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <motion.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         NOSSOS SERVIÇOS
       </motion.h2>
       <div className={styles.grid}>
@@ -117,20 +111,12 @@ export default function Servicos() {
 interface CarouselProps { midia: MidiaItem[]; onClick?: (index: number) => void }
 
 function ServicoCarousel({ midia, onClick }: CarouselProps) {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: { perView: 1 },
-    mode: 'snap',
-  })
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({ loop: true, slides: { perView: 1 }, mode: 'snap' })
 
   return (
     <div ref={sliderRef} className={`keen-slider ${styles.carousel}`}>
       {midia.map((item, idx) => (
-        <div
-          key={idx}
-          className={`keen-slider__slide ${styles.slide}`}
-          onClick={() => onClick?.(idx)}
-        >
+        <div key={idx} className={`keen-slider__slide ${styles.slide}`} onClick={() => onClick?.(idx)}>
           <Image
             src={item.src}
             alt={item.alt || ''}
