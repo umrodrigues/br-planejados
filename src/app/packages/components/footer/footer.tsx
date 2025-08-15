@@ -10,6 +10,8 @@ const iconVariants = {
   initial: { scale: 1, color: "#7a6e3c", y: 0 },
 };
 
+const mensagem = encodeURIComponent('Olá, vim do site e gostaria de solicitar um orçamento.');
+
 export default function Footer() {
   return (
     <footer className={styles.footer} id="contato">
@@ -42,7 +44,7 @@ export default function Footer() {
             </Link>
           </motion.div>
           <motion.div whileHover="hover" initial="initial" variants={iconVariants}>
-            <Link href="https://api.whatsapp.com/send?phone=555198503622" target="_blank" aria-label="WhatsApp">
+            <Link href={`https://wa.me/555198503622?text=${mensagem}`} target="_blank" aria-label="WhatsApp">
               <FaWhatsapp size={22} />
             </Link>
           </motion.div>

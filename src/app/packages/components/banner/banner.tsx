@@ -4,6 +4,8 @@ import Image from 'next/image'
 import styles from './Banner.module.scss'
 import { motion } from 'framer-motion'
 
+const mensagem = encodeURIComponent('Olá, vim do site e gostaria de solicitar um orçamento.')
+
 export default function Banner() {
   return (
     <div className={styles.banner}>
@@ -38,7 +40,7 @@ export default function Banner() {
         </motion.h2>
 
         <motion.a
-          href="https://api.whatsapp.com/send?phone=555198503622"
+          href={`https://wa.me/555198503622?text=${mensagem}`}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}

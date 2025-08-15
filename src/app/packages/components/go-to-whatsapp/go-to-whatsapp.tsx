@@ -4,8 +4,9 @@ import { AiOutlineWhatsApp } from 'react-icons/ai';
 import styles from './GoToWhatsapp.module.scss';
 
 export const GoToWhatsapp = () => {
+  const mensagem = encodeURIComponent('Olá, vim do site e gostaria de solicitar um orçamento.');
   const handleClick = () => {
-    window.open('https://api.whatsapp.com/send?phone=555198503622', '_blank');
+    window.open(`https://wa.me/555198503622?text=${mensagem}`, '_blank');
   };
 
   return (
